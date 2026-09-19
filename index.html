@@ -94,7 +94,7 @@ main{position:relative}
 .countdown .bar{flex:1;height:5px;border-radius:99px;background:#E5DCC9;overflow:hidden}
 .countdown .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--accent));transition:width .6s}
 /* card stage */
-.stage{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:2px 16px 0}
+.stage{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:2px 16px 0;height:62vh}
 .card{
   position:relative;flex:1;min-height:0;border-radius:var(--radius);overflow:hidden;
   background:#000;box-shadow:var(--shadow);cursor:grab;touch-action:pan-y;
@@ -2734,8 +2734,9 @@ function renderPrep(){
 }
 
 /* ================= 我的（关于/更新日志/反馈） ================= */
-var APP_VERSION = '1.0.5';
+var APP_VERSION = '1.0.6';
 var UPDATE_LOG = [
+  { v: 'v1.0.6', date: '2026-09', items: ['修复App内直接更新闪退', '修复WebView页面不能上下滑动', '首页卡片布局修正'] },
   { v: 'v1.0.5', date: '2026-09', items: ['检查更新改为真实联网检测', '修复版本号显示不一致'] },
   { v: 'v1.0.4', date: '2026-09', items: ['修复全部页底部导航消失', '全部页新增食谱关键字搜索'] },
   { v: 'v1.0.3', date: '2026-09', items: ['iQOO Pad 平板横屏自适应', '宽屏卡片多列布局'] },
