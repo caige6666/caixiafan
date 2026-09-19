@@ -383,6 +383,43 @@ main{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column
 .f-item .f-nm{flex:1;font-size:12.5px;font-weight:600}
 .f-item .f-st{font-size:11px;color:var(--ink-2)}
 .f-item .f-rm{border:none;background:none;color:var(--ink-2);font-size:11.5px;cursor:pointer;padding:4px 6px;font-family:inherit}
+.me-hero{text-align:center;padding:26px 0 18px}
+.me-hero img{width:78px;height:78px;border-radius:20px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.me-name{font-size:22px;font-weight:800;margin-top:10px}
+.me-ver{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+.me-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px}
+.me-card-t{font-size:14px;font-weight:800;margin-bottom:10px}
+.log-block{padding:10px 0;border-top:1px dashed var(--line)}
+.log-block:first-of-type{border-top:none;padding-top:0}
+.log-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.log-head b{font-size:13.5px}
+.log-head span{font-size:11px;color:var(--ink-2)}
+.log-item{font-size:12.5px;color:var(--ink-2);line-height:1.9}
+.me-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:4px 0}
+.me-row .ok{color:var(--green);font-weight:700;font-size:12.5px}
+.me-tip{font-size:11.5px;color:var(--ink-2);line-height:1.7;margin-top:8px}
+.fb-text{width:100%;min-height:78px;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:var(--paper);font-size:13px;color:var(--ink);font-family:inherit;resize:vertical;box-sizing:border-box}
+.fb-text:focus{outline:none;border-color:var(--green)}
+.fb-types{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fb-type{padding:11px 6px;border:1px solid var(--line);border-radius:10px;background:var(--paper);font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;text-align:center;color:var(--ink)}
+.fb-type.on{border-color:var(--accent);background:var(--accent-soft,#e8f5e9);color:var(--accent)}
+.fb-input{width:100%;padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:var(--paper);font-size:13px;color:var(--ink);font-family:inherit;margin-top:10px;box-sizing:border-box}
+.fb-input:focus{outline:none;border-color:var(--green)}
+.prep-able{cursor:pointer;user-select:none}
+.prep-able .dot{font-size:10px;color:var(--green);width:9px;display:inline-block}
+.ing-row.in-prep{background:var(--green-soft,rgba(76,175,80,.08));border-radius:8px}
+.prep-badge{font-style:normal;position:absolute;top:2px;right:6px;background:#e53935;color:#fff;font-size:9px;line-height:1;padding:2px 4px;border-radius:8px;font-weight:700}
+.nav-item{position:relative}
+.prep-head{display:flex;justify-content:space-between;align-items:center;padding:6px 2px 14px}
+.prep-total{font-size:14px;font-weight:700}
+.prep-group{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px;margin-bottom:12px}
+.prep-ghead{font-size:13px;font-weight:800;padding:9px 0 4px;border-bottom:1px solid var(--line);margin-bottom:2px}
+.prep-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.prep-item:last-child{border-bottom:none}
+.prep-item input{accent-color:var(--green);width:17px;height:17px}
+.prep-item .p-n{flex:1;font-size:13.5px;font-weight:600}
+.prep-item .p-a{font-size:12px;color:var(--ink-2)}
+.prep-item.done .p-n{text-decoration:line-through;color:var(--ink-2)}
 .dt-order{display:flex;align-items:center;gap:7px;width:100%;padding:13px;border-radius:14px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:700;cursor:pointer;margin-bottom:18px;font-family:inherit}
 .dt-order:active{background:var(--accent);color:#fff}
 .dt-order svg{width:16px;height:16px;flex-shrink:0}
@@ -490,13 +527,21 @@ main{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column
       <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16"/><path d="M8 13h8"/></svg>
       <span>全部</span>
     </button>
+    <button class="nav-item" data-nav="order">
+      <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>
+      <span>点单</span>
+    </button>
+    <button class="nav-item" data-nav="prep">
+      <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 12.5a1.5 1.5 0 0 1-1.5 1.4H7.7a1.5 1.5 0 0 1-1.5-1.4z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <span>备菜<i class="prep-badge" id="prepBadge"></i></span>
+    </button>
     <button class="nav-item" data-nav="fav">
       <svg viewBox="0 0 24 24"><path d="M12 20.5 4.6 14a5 5 0 0 1 .6-7.6 4.8 4.8 0 0 1 6.2.4l.6.6.6-.6a4.8 4.8 0 0 1 6.2-.4 5 5 0 0 1 .6 7.6z"/></svg>
       <span>收藏</span>
     </button>
-    <button class="nav-item" data-nav="order">
-      <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>
-      <span>点单</span>
+    <button class="nav-item" data-nav="me">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-4 4.6-6.2 7.5-6.2s6.1 2.2 7.5 6.2"/></svg>
+      <span>我的</span>
     </button>
   </nav>
 </div>
@@ -1762,6 +1807,8 @@ function parseRoute(){
   if(h.startsWith('recipe/')) return {name:'recipe', id: h.slice(7)};
   if(h === 'library') return {name:'library'};
   if(h === 'fav') return {name:'fav'};
+  if(h === 'me') return {name:'me'};
+  if(h === 'prep') return {name:'prep'};
   if(h === 'order' || h.startsWith('order')){
     const qs = h.indexOf('?') >= 0 ? h.slice(h.indexOf('?') + 1) : '';
     const af = new URLSearchParams(qs).get('addfriend');
@@ -1780,6 +1827,9 @@ function router(){
   else if(r.name==='fav') renderFav();
   else if(r.name==='recipe') renderDetail(r.id);
   else if(r.name==='order') renderOrder();
+  else if(r.name==='me') renderMe();
+  else if(r.name==='prep') renderPrep();
+  updatePrepBadge();
 }
 
 /* ================= 首页 ================= */
@@ -2065,9 +2115,9 @@ function renderDetail(id){
           <p class="desc-line">${r.desc}</p>
         </div>
         <div class="dsec">
-          <div class="dsec-h sub"><span class="no">2</span>食材准备</div>
+          <div class="dsec-h sub"><span class="no">2</span>食材准备<small style="font-weight:500;color:var(--ink-2)">点一下加入备菜</small></div>
           <div class="ing-list">
-            ${r.ingredients.map(i=>`<div class="ing-row"><span class="name"><span class="dot"></span>${i.n}</span><span class="amt">${i.a}</span></div>`).join('')}
+            ${r.ingredients.map(i=>{const inP=prepList().some(p=>p.dishId===id&&p.n===i.n);return `<div class="ing-row prep-able${inP?' in-prep':''}" data-n="${i.n}" data-a="${i.a}"><span class="name"><span class="dot">${inP?'✓':''}</span>${i.n}</span><span class="amt">${i.a}</span></div>`;}).join('')}
           </div>
         </div>
         <div class="dsec">
@@ -2095,6 +2145,14 @@ function renderDetail(id){
   $('#dtOrder').addEventListener('click', () => { addToCart(id); toast('已加入点单「'+r.name+'」'); $('#dtOrderCnt').textContent = orderCartCount(); });
   $('#dtPrev').addEventListener('click', () => { moveId(meal,-1); location.hash = '#/recipe/' + currentId(meal); });
   $('#dtNext').addEventListener('click', () => { moveId(meal,+1); location.hash = '#/recipe/' + currentId(meal); });
+  document.querySelectorAll('.prep-able').forEach(el => el.addEventListener('click', () => {
+    const n = el.dataset.n, a = el.dataset.a;
+    let l = prepList();
+    const idx = l.findIndex(p => p.dishId === id && p.n === n);
+    if(idx >= 0){ l.splice(idx,1); el.classList.remove('in-prep'); el.querySelector('.dot').textContent=''; toast('已从备菜移除'); }
+    else { l.push({dishId:id, dishName:r.name, n, a, done:false}); el.classList.add('in-prep'); el.querySelector('.dot').textContent='✓'; toast('已加入备菜：'+n); }
+    savePrep(l); updatePrepBadge();
+  }));
 }
 
 /* ================= 收藏面板 ================= */
@@ -2604,6 +2662,105 @@ function renderOrder(){
 }
 setTimeout(() => { startRetry(); openPeer(); }, 600);
 
+
+
+/* ================= 备菜 ================= */
+function prepList(){ try{ return JSON.parse(localStorage.getItem('cxF_prep')||'[]'); }catch(e){ return []; } }
+function savePrep(l){ try{ localStorage.setItem('cxF_prep', JSON.stringify(l)); }catch(e){} }
+function updatePrepBadge(){
+  const b = document.getElementById('prepBadge');
+  if(!b) return;
+  const n = prepList().length;
+  b.textContent = n || '';
+  b.style.display = n ? '' : 'none';
+}
+function renderPrep(){
+  const main = $('#main');
+  const l = prepList();
+  const undone = l.filter(x=>!x.done).length;
+  // 按菜分组
+  const groups = {};
+  l.forEach(x => { (groups[x.dishName] = groups[x.dishName] || []).push(x); });
+  const keys = Object.keys(groups);
+  let html = '<section class="view" data-view="prep">';
+  html += '<div class="prep-head"><div><div class="prep-total">共 '+l.length+' 种食材 · 还差 '+undone+' 种</div></div>';
+  html += (l.length ? '<button class="mini-btn" id="btnClearPrep">清空</button>' : '') + '</div>';
+  if(!l.length){
+    html += '<div class="order-empty" style="padding:60px 20px">备菜清单是空的<br><small style="font-size:12px;color:var(--ink-2)">去菜详情页点一下食材，就会加到这里</small></div>';
+  } else {
+    keys.forEach(name => {
+      const items = groups[name];
+      html += '<div class="prep-group"><div class="prep-ghead">'+name+'</div>';
+      items.forEach((x, i) => {
+        html += '<label class="prep-item'+(x.done?' done':'')+'"><input type="checkbox" '+(x.done?'checked':'')+' data-dish="'+x.dishName+'" data-n="'+x.n+'"><span class="p-n">'+x.n+'</span><span class="p-a">'+x.a+'</span></label>';
+      });
+      html += '</div>';
+    });
+  }
+  html += '</section>';
+  main.innerHTML = html;
+  document.querySelectorAll('.prep-item input').forEach(cb => cb.addEventListener('change', () => {
+    let l2 = prepList();
+    const it = l2.find(x => x.dishName === cb.dataset.dish && x.n === cb.dataset.n);
+    if(it){ it.done = cb.checked; savePrep(l2); }
+    cb.parentElement.classList.toggle('done', cb.checked);
+    renderPrep();
+  }));
+  const bc = $('#btnClearPrep');
+  if(bc) bc.addEventListener('click', () => { if(confirm('清空全部备菜？')){ savePrep([]); renderPrep(); updatePrepBadge(); } });
+}
+
+/* ================= 我的（关于/更新日志/反馈） ================= */
+var APP_VERSION = '1.0.1';
+var UPDATE_LOG = [
+  { v: 'v1.0.1', date: '2026-09', items: ['更换应用图标为红烧肉饭主题，视觉更有食欲'] },
+  { v: 'v1.0.0', date: '2026-09', items: ['1000 道菜谱按时段推荐', '菜详情：食材准备与制作步骤', '分类收藏', '扫码加好友，点单实时送达'] }
+];
+function renderMe(){
+  var main = $('#main');
+  var logs = UPDATE_LOG.map(function(g){
+    return '<div class="log-block"><div class="log-head"><b>'+g.v+'</b><span>'+g.date+'</span></div>'+
+      g.items.map(function(t){ return '<div class="log-item">· '+t+'</div>'; }).join('')+'</div>';
+  }).join('');
+  main.innerHTML = '<section class="view" data-view="me">'
+    + '<div class="me-hero"><img src="assets/icon-192.png" alt=""><div class="me-name serif">菜很下饭</div><div class="me-ver">当前版本 v'+APP_VERSION+'</div></div>'
+    + '<div class="me-card"><div class="me-card-t">更新日志</div>'+logs+'</div>'
+    + '<div class="me-card"><div class="me-card-t">检查更新</div>'
+    + '<div class="me-row"><span>版本状态</span><span class="ok">已是最新版</span></div>'
+    + '<div class="me-tip">如有新版本，重新安装最新 APK 即可覆盖更新，收藏与点单数据不会丢失。</div></div>'
+    + '<div class="me-card"><div class="me-card-t">意见反馈</div>'
+    + '<div class="fb-types">'
+    + '<button class="fb-type on" data-t="功能建议">💡 功能建议</button>'
+    + '<button class="fb-type" data-t="问题反馈">🐛 问题反馈</button>'
+    + '<button class="fb-type" data-t="内容建议">📝 内容建议</button>'
+    + '<button class="fb-type" data-t="其他">✨ 其他</button>'
+    + '</div>'
+    + '<textarea id="fbText" class="fb-text" placeholder="请写下你的意见或建议…\n例如：希望增加XX功能、XX打不开、界面不够美观等"></textarea>'
+    + '<input id="fbContact" class="fb-input" placeholder="邮箱/微信，方便我们回复你（可选）">'
+    + '<button class="mini-btn primary" id="btnFb" style="width:100%;margin-top:10px">提交反馈</button>'
+    + '<div class="me-tip">提交后开发者即可在后台收到你的反馈</div></div>'
+    + '</section>';
+  var fbType = '功能建议';
+  document.querySelectorAll('.fb-type').forEach(function(b){ b.addEventListener('click', function(){
+    document.querySelectorAll('.fb-type').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    fbType = b.dataset.t;
+  }); });
+  var fb = $('#btnFb');
+  if(fb) fb.addEventListener('click', function(){
+    var t = $('#fbText') ? $('#fbText').value.trim() : '';
+    if(!t){ toast('先写两句反馈内容再提交'); return; }
+    var c = $('#fbContact') ? $('#fbContact').value.trim() : '';
+    var txt = '【菜很下饭 v'+APP_VERSION+'】\n类型：'+fbType+'\n反馈：'+t+(c?('\n联系方式：'+c):'')+'\n设备：'+navigator.userAgent;
+    copyText(txt);
+    toast('反馈已复制，请粘贴到腾讯问卷提交');
+    var QURL = 'https://wj.qq.com/s2/27948741/bh6f/';
+    if(QURL){ window.open(QURL, '_blank'); }
+    if($('#fbText')) $('#fbText').value='';
+    if($('#fbContact')) $('#fbContact').value='';
+  });
+}
+
 /* ================= 全局事件 ================= */
 window.addEventListener('hashchange', router);
 document.querySelectorAll('.nav-item').forEach(b => b.addEventListener('click', () => {
@@ -2629,7 +2786,16 @@ router();
 
 // PWA 离线支持：仅 HTTPS 环境下注册（本地 file:// 打开时自动跳过，不影响使用）
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
-  navigator.serviceWorker.register('./sw.js').catch(function(){});
+  navigator.serviceWorker.register('./sw.js').then(function(reg){
+    reg.addEventListener('updatefound', function(){
+      var nw = reg.installing;
+      nw.addEventListener('statechange', function(){
+        if(nw.state === 'installed' && navigator.serviceWorker.controller){
+          toast('发现新版本，刷新页面后生效');
+        }
+      });
+    });
+  }).catch(function(){});
 }
 </script>
 </body>
