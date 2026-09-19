@@ -172,6 +172,20 @@ main{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column
 .tab .cnt{opacity:.7;font-weight:500;font-size:11px;margin-left:3px}
 .grid-wrap{flex:1;overflow-y:auto;padding:6px 16px 90px;-webkit-overflow-scrolling:touch}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* ===== 平板横屏自适应 ===== */
+@media(min-width:900px){
+  #app{max-width:1080px}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .grid-wrap{padding:8px 28px 100px}
+  .detail-body{padding:24px 36px 40px}
+  .order-page{padding:4px 32px 28px}
+  .topbar{padding:18px 36px 12px}
+  .sheet{max-width:620px}
+  .detail-nav{padding:0 36px}
+}
+@media(min-width:1200px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+}
 .lib-card{
   background:var(--card);border-radius:16px;overflow:hidden;cursor:pointer;
   box-shadow:0 3px 12px rgba(60,50,30,.07);transition:transform .15s;position:relative;
