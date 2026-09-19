@@ -2751,8 +2751,9 @@ function renderMe(){
     + '<div class="me-hero"><img src="assets/icon-192.png" alt=""><div class="me-name serif">菜很下饭</div><div class="me-ver">当前版本 v'+APP_VERSION+'</div></div>'
     + '<div class="me-card"><div class="me-card-t">更新日志</div>'+logs+'</div>'
     + '<div class="me-card"><div class="me-card-t">检查更新</div>'
-    + '<div class="me-row"><span>版本状态</span><span class="ok">已是最新版</span></div>'
-    + '<div class="me-tip">如有新版本，重新安装最新 APK 即可覆盖更新，收藏与点单数据不会丢失。</div></div>'
+    + '<div class="me-row"><span>当前版本</span><span>v'+APP_VERSION+'</span></div>'
+    + '<button class="mini-btn primary" id="btnCheckUpdate" style="width:100%;margin-top:10px">立即检查更新</button>'
+    + '<div class="me-tip">联网检查 GitHub 上的最新版本，有新版本会提示下载</div></div>'
     + '<div class="me-card"><div class="me-card-t">意见反馈</div>'
     + '<div class="fb-types">'
     + '<button class="fb-type on" data-t="功能建议">💡 功能建议</button>'
@@ -2771,6 +2772,22 @@ function renderMe(){
     b.classList.add('on');
     fbType = b.dataset.t;
   }); });
+    var cu = $('#btnCheckUpdate');
+  if(cu) cu.addEventListener('click', function(){
+    cu.textContent = '检查中…'; cu.disabled = true;
+    fetch('https://caige6666.github.io/caixiafan/version.json?_='+Date.now())
+      .then(r=>r.json())
+      .then(v=>{
+        cu.textContent = '立即检查更新'; cu.disabled = false;
+        var latest = v.latest || APP_VERSION;
+        var a = latest.split('.').map(Number), b = APP_VERSION.split('.').map(Number);
+        var newer = false;
+        for(var i=0;i<3;i++){ if((a[i]||0)>(b[i]||0)){ newer=true; break; } if((a[i]||0)<(b[i]||0)) break; }
+        if(newer){ toast('发现新版本 v'+latest+'，请去 GitHub 下载'); window.open(v.apk||'https://github.com/caige6666/caixiafan','_blank'); }
+        else { toast('当前已是最新版 v'+APP_VERSION); }
+      })
+      .catch(e=>{ cu.textContent='立即检查更新'; cu.disabled=false; toast('检查失败，请检查网络后重试'); });
+  });
   var fb = $('#btnFb');
   if(fb) fb.addEventListener('click', function(){
     var t = $('#fbText') ? $('#fbText').value.trim() : '';
