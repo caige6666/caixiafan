@@ -45,16 +45,17 @@ body{
 #app{
   max-width:520px;
   margin:0 auto;
-  min-height:100dvh;
+  height:100dvh;
   background:var(--paper);
   position:relative;
   display:flex;
   flex-direction:column;
+  overflow:hidden;
   box-shadow:0 0 60px rgba(60,50,30,.12);
 }
 @media(min-width:560px){
   body{padding:24px 0}
-  #app{border-radius:28px;min-height:calc(100dvh - 48px);overflow:hidden}
+  #app{border-radius:28px;height:calc(100dvh - 48px)}
 }
 /* ===== top bar ===== */
 .topbar{
@@ -159,6 +160,10 @@ main{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column
 .card.anim-right{animation:slideInRight .32s cubic-bezier(.2,.8,.3,1)}
 .card.anim-up{animation:slideInUp .36s cubic-bezier(.2,.8,.3,1)}
 /* ===== library ===== */
+.lib-search-wrap{margin:10px 0 12px}
+.lib-search{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper);font-size:13.5px;color:var(--ink);font-family:inherit;box-sizing:border-box}
+.lib-search:focus{outline:none;border-color:var(--green)}
+.lib-empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:#999;font-size:14px}
 .lib-head{padding:6px 18px 10px;flex-shrink:0}
 .lib-title{font-size:24px;font-weight:900;margin-bottom:12px}
 .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
@@ -1975,14 +1980,17 @@ function animateRefresh(meal){
 
 /* ================= 全部食谱 ================= */
 let libFilter = 'all';
+let libSearch = '';
 function renderLibrary(){
   const cats = ['all','breakfast','lunch','dinner'];
-  const list = RECIPES.filter(r => libFilter==='all' || r.meal===libFilter);
+  const kw = libSearch.trim().toLowerCase();
+  const list = RECIPES.filter(r => (libFilter==='all' || r.meal===libFilter) && (!kw || r.name.toLowerCase().includes(kw) || (r.tags||[]).join(' ').toLowerCase().includes(kw) || (r.desc||'').toLowerCase().includes(kw)));
   const main = $('#main');
   main.innerHTML = `
   <section class="view" data-view="library">
     <div class="lib-head">
       <div class="lib-title serif">全部食谱</div>
+      <div class="lib-search-wrap"><input id="libSearchInput" class="lib-search" type="search" placeholder="搜索食谱，如：红烧肉、鸡蛋、清淡…" value="${libSearch}"></div>
       <div class="tabs">
         ${cats.map(c=>`<button class="tab ${libFilter===c?'on':''}" data-filter="${c}">${c==='all'?'全部':MEALS[c].name}<span class="cnt">${c==='all'?RECIPES.length:poolOf(c).length}</span></button>`).join('')}
       </div>
@@ -2000,10 +2008,13 @@ function renderLibrary(){
             </div>
           </div>
         </div>`).join('')}
+        ${list.length===0?'<div class="lib-empty">没找到相关食谱，换个关键词试试</div>':''}
       </div>
     </div>
   </section>`;
-  main.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => { libFilter = t.dataset.filter; renderLibrary(); }));
+  main.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => { libFilter = t.dataset.filter; renderLibrary(); setTimeout(()=>{var si=$('#libSearchInput'); if(si) si.focus();},0); }));
+  var si = $('#libSearchInput');
+  if(si) si.addEventListener('input', e => { libSearch = e.target.value; renderLibrary(); var ni=$('#libSearchInput'); if(ni){ ni.focus(); ni.setSelectionRange(ni.value.length,ni.value.length); } });
   main.querySelectorAll('.lib-card').forEach(c => {
     const id = c.dataset.id;
     c.addEventListener('click', e => {
